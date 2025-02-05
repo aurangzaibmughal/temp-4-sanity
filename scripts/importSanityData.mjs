@@ -6,11 +6,12 @@ import path from 'path';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
-dotenv.config({ path: path.resolve(__dirname, '../.env.local') });
+dotenv.config();
 
 const client = createClient({
-  projectId: process.env.NEXT_PUBLIC_SANITY_PROJECT_ID,
-  dataset: process.env.NEXT_PUBLIC_SANITY_DATASET,
+  projectId: process.env.SANITY_STUDIO_SANITY_PROJECT_ID,
+  dataset: process.env.SANITY_STUDIO_SANITY_DATASET
+  ,
   token: process.env.SANITY_API_TOKEN,
   apiVersion: '2025-01-15',
   useCdn: false,

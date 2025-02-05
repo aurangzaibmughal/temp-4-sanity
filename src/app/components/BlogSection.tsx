@@ -1,3 +1,4 @@
+
 'use client';
 import Image from 'next/image';
 import Link from "next/link";
@@ -6,7 +7,7 @@ function BlogSection() {
   const blogs = [
     {
       id: 1,
-      img: "/2dcYhvbHV-M.png",
+      img: "/Frame1.png",
       author: "Saber Ali",
       date: "21 August, 2020",
       title: "Top Essential Trends in 2020",
@@ -15,7 +16,7 @@ function BlogSection() {
     },
     {
       id: 2,
-      img: "/JIUjvqe2ZHg.png",
+      img: "/Frame2.png",
       author: "Surfauxion",
       date: "21 August, 2020",
       title: "Top Essential Trends in 2020",
@@ -24,7 +25,7 @@ function BlogSection() {
     },
     {
       id: 3,
-      img: "/Frame 3.png",
+      img: "/Frame3.png",
       author: "Saber Ali",
       date: "21 August, 2020",
       title: "Top Essential Trends in 2020",
@@ -47,8 +48,8 @@ function BlogSection() {
               <Image
                 src={blog.img}
                 alt={blog.title}
-                layout="fill"
-                objectFit="cover"
+                fill
+                style={{ objectFit: "cover" }}
                 className="rounded-md"
               />
             </div>
@@ -56,10 +57,10 @@ function BlogSection() {
             {/* Author and Date */}
             <div className="flex items-center space-x-2 mt-4">
               {/* Pen Icon */}
-              <Image src="/images/vector2.png" alt="Pen" width={20} height={20} />
+              <Image src="/vector2.png" alt="Pen" width={20} height={20} />
               <span className="text-[#151875] font-medium">{blog.author}</span>
               {/* Calendar Icon */}
-              <Image src="/images/vector1.png" alt="Calendar" width={20} height={20} />
+              <Image src="/vector1.png" alt="Calendar" width={20} height={20} />
               <span className="text-[#151875] font-medium">{blog.date}</span>
             </div>
 
@@ -73,12 +74,12 @@ function BlogSection() {
 
             {/* Read More */}
             <Link href="/blog">
-            <button
-              className="underline text-sm font-medium mt-4"
-              style={{ color: blog.titleColor }}
-            >
-              Read More
-            </button>
+              <button
+                className="underline text-sm font-medium mt-4"
+                style={{ color: blog.titleColor }}
+              >
+                Read More
+              </button>
             </Link>
           </div>
         ))}
@@ -88,3 +89,6 @@ function BlogSection() {
 }
 
 export default BlogSection;
+
+
+

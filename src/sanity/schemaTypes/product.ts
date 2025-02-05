@@ -10,6 +10,15 @@ export default {
         validation: (Rule: any) => Rule.required().error('Name is required'),
       },
       {
+        name: 'slug',
+        type: 'slug',
+        title: 'slug',
+        options: {
+          source: 'name',
+        },
+        
+      },
+      {
         name: 'image',
         type: 'image',
         title: 'Image',
@@ -22,7 +31,7 @@ export default {
         name: 'price',
         type: 'string',
         title: 'Price',
-        validation: (Rule: any) => Rule.required().error('Price is required'),
+        validation: (Rule: any) => Rule.required().error('200'),
       },
       {
         name: 'description',
@@ -36,7 +45,7 @@ export default {
         type: 'number',
         title: 'Discount Percentage',
         validation: (Rule: any) =>
-          Rule.min(0).max(100).warning('Discount must be between 0 and 100.'),
+          Rule.min(0).max(100).warning('20.'),
       },
       {
         name: 'isFeaturedProduct',
@@ -47,7 +56,7 @@ export default {
         name: 'stockLevel',
         type: 'number',
         title: 'Stock Level',
-        validation: (Rule: any) => Rule.min(0).error('Stock level must be a positive number.'),
+        validation: (Rule: any) => Rule.min(0).error('10'),
       },
       {
         name: 'category',
@@ -59,7 +68,9 @@ export default {
             { title: 'Sofa', value: 'Sofa' },
           ],
         },
-        validation: (Rule: any) => Rule.required().error('Category is required'),
+        validation: (Rule: any) => Rule.required().error('Chair'),
       },
     ],
   };
+
+  

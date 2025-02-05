@@ -1,17 +1,46 @@
 'use client';
 
+
 import Image from 'next/image';
-import { HeartIcon, ShoppingCartIcon, MagnifyingGlassIcon } from '@heroicons/react/24/outline';
+import { useEffect, useState } from 'react';
+import { client } from '@/sanity/lib/client'; // Ensure this path is correct
+import { Product } from '../../../types/products';
+import { allProducts , four, six } from '@/sanity/lib/queries';
+import { addToCart } from '../actions/action';
+import { HeartIcon, MagnifyingGlassIcon, ShoppingCartIcon } from '@heroicons/react/24/outline';
+import { urlFor } from '@/sanity/lib/image';
+
+
 
 function LatestProducts() {
-  const products = [
-    { id: 1, img: "/latest5.png" },
-    { id: 2, img: "/latest2.png", sale: true },
-    { id: 3, img: "/image 1168.png" },
-    { id: 4, img: "/latst3.png" },
-    { id: 5, img: "/latest4.png" },
-    { id: 6, img: "/image 3.png" },
-  ];
+    const [products, setProducts] = useState<Product[]>([]);
+    const [loading, setLoading] = useState(true);
+    const [error, setError] = useState<string | null>(null);
+
+    useEffect(() => {
+        async function fetchProducts() {
+            try {
+                const fetchedProducts = await client.fetch(six);
+                setProducts(fetchedProducts);
+            } catch (err) {
+                setError('Failed to fetch products');
+                console.error('Fetch error:', err); // More detailed logging
+            } finally {
+                setLoading(false);
+            }
+        }
+        fetchProducts();
+    }, []);
+
+    if (loading) return <div>Loading...</div>;
+    if (error) return <div>{error}</div>;
+
+    const handleAddToCart = (e: React.MouseEvent, product: Product) => {
+        e.preventDefault();
+        addToCart(product);
+        alert("OK")
+    }
+
 
   return (
     <div className="w-full bg-white py-20">
@@ -38,17 +67,18 @@ function LatestProducts() {
       {/* Product Grid */}
       <div className="w-full max-w-screen-xl mx-auto grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8">
         {products.map((product) => (
-          <div key={product.id} className="relative group">
+          <div key={product._id} className="relative group">
             {/* Product Image */}
             <div className="w-full bg-gray-200 flex justify-center items-center relative overflow-hidden h-[300px] transition-all duration-300 group-hover:bg-white">
               {/* Sale Tag */}
-              {product.sale && (
+              {product.stockLevel && (
                 <span className="absolute top-2 left-2 bg-[#3F509E] text-white text-sm px-3 py-1 rounded">
                   Sale
                 </span>
+                
               )}
               <Image
-                src={product.img}
+                src={urlFor(product.image).url()}
                 width={200}
                 height={200}
                 alt="Comfy Handy Craft"

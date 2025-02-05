@@ -13,7 +13,7 @@ const TopBar = () => {
         {/* Left Section */}
         <div className="flex items-center gap-6">
           {/* Email */}
-          <a href="mailto:mhhasanul@gmail.com" className="flex items-center gap-2 hover:text-gray-200">
+          <a href="aurangzaib.mughal@gmail.com" className="flex items-center gap-2 hover:text-gray-200">
             <FaEnvelope />
             <span>aurangzaib.mughal@gmail.com</span>
           </a>
